@@ -15,7 +15,6 @@ namespace InternetProviderApp.Services
             _userRepo = userRepo;
         }
 
-        // Новый метод для регистрации любой неудачной попытки (CAPTCHA, пароль и т.д.)
         public void RegisterFailedAttempt(string login, string reason)
         {
             _failedAttempts++;
@@ -43,7 +42,6 @@ namespace InternetProviderApp.Services
                 throw new InvalidOperationException("Неверный логин или пароль.");
             }
 
-            // Успешный вход – сбрасываем счётчик
             _failedAttempts = 0;
             _blockedUntil = null;
             _userRepo.AddLoginAttempt(login, true, "Успешный вход");

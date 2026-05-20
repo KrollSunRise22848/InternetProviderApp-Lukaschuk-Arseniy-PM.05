@@ -27,12 +27,8 @@ namespace InternetProviderApp.Forms
         {
             try
             {
-                // Проверка блокировки (вызовется внутри _auth.Login, но для CAPTCHA тоже нужно проверить)
-                // Сначала проверим, не заблокирован ли вход вообще
-                // Для этого сделаем отдельную проверку (можно вызвать _auth.Login с заведомо неверными данными, но лучше так)
                 try
                 {
-                    // Имитация проверки блокировки (без вызова Login)
                     var dummy = _auth.Login("", "");
                 }
                 catch (InvalidOperationException ex) when (ex.Message.Contains("заблокирован"))
@@ -40,11 +36,10 @@ namespace InternetProviderApp.Forms
                     MessageBox.Show(ex.Message, "Ошибка");
                     return;
                 }
-                catch { } // игнорируем другие ошибки
+                catch { } 
 
                 if (!_captcha.Validate(txtCaptcha.Text))
                 {
-                    // Регистрируем неудачную попытку из-за CAPTCHA
                     _auth.RegisterFailedAttempt(txtLogin.Text.Trim(), "Неверная CAPTCHA");
                     lblCaptcha.Text = _captcha.Generate();
                     txtCaptcha.Clear();

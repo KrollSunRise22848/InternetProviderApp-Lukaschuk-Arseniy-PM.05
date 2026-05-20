@@ -60,14 +60,12 @@ namespace InternetProviderApp.Data
             ";
             Execute(connection, systemTables);
 
-            // Добавляем роли
             Execute(connection, @"
                 INSERT OR IGNORE INTO Roles (Id, Name) VALUES (1, 'admin');
                 INSERT OR IGNORE INTO Roles (Id, Name) VALUES (2, 'operator');
                 INSERT OR IGNORE INTO Roles (Id, Name) VALUES (3, 'user');
             ");
 
-            // Добавим пару тарифов для теста
             Execute(connection, @"
                 INSERT OR IGNORE INTO Tariffs (Id, Name, Price, Speed) VALUES (1, 'Старт', 300, 30);
                 INSERT OR IGNORE INTO Tariffs (Id, Name, Price, Speed) VALUES (2, 'Оптима', 600, 100);

@@ -36,19 +36,16 @@ namespace InternetProviderApp.Forms
 
         private void LoadComboBoxes()
         {
-            // Абоненты
             var subscribers = _subRepo.GetAll();
             cmbSubscriber.DataSource = subscribers;
             cmbSubscriber.DisplayMember = "FullName";
             cmbSubscriber.ValueMember = "Id";
 
-            // Тарифы
             var tariffs = _tariffRepo.GetAll();
             cmbTariff.DataSource = tariffs;
             cmbTariff.DisplayMember = "Name";
             cmbTariff.ValueMember = "Id";
 
-            // Статусы
             cmbStatus.Items.Clear();
             cmbStatus.Items.AddRange(new string[] { "новая", "выполнена", "отменена" });
             cmbStatus.SelectedIndex = 0;
